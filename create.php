@@ -6,6 +6,7 @@
 require("../../config.php");
 require("function.php");
 
+
 if(isset($_SESSION["userId"])) {
 		header("location: data.php");
 	}
@@ -110,7 +111,7 @@ if( isset( $_POST["signupPassword"] ) ){
 <html>
 <body>
 
-<h1>Loo kasutaja</h1>
+<h1>Loo kasutaja </h1>
 	<form method="POST">
 	
 		<label>Username</label>
@@ -130,10 +131,14 @@ if( isset( $_POST["signupPassword"] ) ){
 		<input type="password" name="signupPassword" placeholder="Parool"> <?php echo $signupPasswordError; ?>
 		<br><br>
 		
-		<input type="submit" value="Loo kasutaja">
+		<input type="submit" value="Loo kasutaja"><br>
 		
 		
 	</form>
 
+	<a href="login.php">
+		<button>Logi sisse</button>
+		</a>
+	
 </body>
 </html>

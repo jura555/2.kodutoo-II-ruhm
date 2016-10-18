@@ -34,7 +34,7 @@
 		$database = "if16_juri";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		$stmt = $mysqli->prepare("
-		SELECT id, email, password, ssername, created 
+		SELECT id, email, password, username, created 
 		FROM kodutooo
 		WHERE email = ?");
 	
@@ -77,7 +77,29 @@
 	return $error;	
 	}
 
+function addWish ($activity, $time, $day) {
+		
+		$error = "";
 
+		
+		$database = "if16_juri";
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
+		$stmt = $mysqli->prepare("INSERT INTO huvi_data (ativity, time, day) VALUES (?, ?, ?)");
+	
+		echo $mysqli->error;
+		
+		$stmt->bind_param("sss", $activity, $time, $day);
+		
+		if($stmt->execute()) {
+			echo "salvestamine onnestus";
+		} else {
+		 	echo "ERROR ".$stmt->error;
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	}
 
 
 
