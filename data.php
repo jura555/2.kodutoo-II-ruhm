@@ -3,7 +3,7 @@
 require("function.php");
 
 if (!isset($_SESSION["userId"])) {
-	header("Location: logi3.php");
+	header("Location: login.php");
 	exit();
 
 }
@@ -13,11 +13,11 @@ if(isset($_GET["logout"])) {
 	exit();
 }
 $error = "";
-	if ( isset($_POST["activity"]) && isset($_POST["day"]) && 
-		!empty($_POST["activity"]) && !empty($_POST["day"]) &&
-		isset($_POST["time"]) && !empty($_POST["time"])) {
+if ( isset($_POST["activity"]) && isset($_POST["day"]) && 
+	!empty($_POST["activity"]) && !empty($_POST["day"]) &&
+	isset($_POST["time"]) && !empty($_POST["time"])) {
 		  
-		addWish($_POST["activity"], $_POST["day"], $_POST["time"]);
+	addWish($_POST["activity"], $_POST["day"], $_POST["time"]);
 		  
 	}
 
@@ -29,6 +29,8 @@ $error = "";
 <a href="?logout=1"> Logi Valja</a>
 </p>
 
+
+<form method="POST">
 <p>Vali tegevus</p>
 <div class="styled-select">
    <select name="activity">
@@ -59,3 +61,5 @@ $error = "";
 </div>
 <br>
 <input type="submit" value="Submit"><br>
+</form>
+

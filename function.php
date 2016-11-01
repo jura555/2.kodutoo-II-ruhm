@@ -84,11 +84,13 @@ function addWish ($activity, $time, $day) {
 		
 		$database = "if16_juri";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
-		$stmt = $mysqli->prepare("INSERT INTO huvi_data (ativity, time, day) VALUES (?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO huvi_data (activity, time, day, username) VALUES (?, ?, ?, ?)");
 	
 		echo $mysqli->error;
 		
-		$stmt->bind_param("sss", $activity, $time, $day);
+		$stmt->bind_param("ssss", $activity, $time, $day, $_SESSION["userUsername"]);
+		
+		echo $mysqli->error;
 		
 		if($stmt->execute()) {
 			echo "salvestamine onnestus";
