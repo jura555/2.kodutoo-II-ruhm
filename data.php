@@ -15,12 +15,16 @@ if(isset($_GET["logout"])) {
 $error = "";
 if ( isset($_POST["activity"]) && isset($_POST["day"]) && 
 	!empty($_POST["activity"]) && !empty($_POST["day"]) &&
-	isset($_POST["time"]) && !empty($_POST["time"])) {
+	isset($_POST["time"]) && !empty($_POST["time"]) &&
+	isset($_POST["username"]) && !empty($_POST["username"])) {
 		  
-	addWish($_POST["activity"], $_POST["day"], $_POST["time"]);
+	addWish($_POST["activity"], $_POST["day"], $_POST["time"], $_POST["username"]);
 		  
 	}
 
+$huvi_data = getAllinterests();
+	
+	
 ?>
 
 <h1><h1>
@@ -62,4 +66,74 @@ if ( isset($_POST["activity"]) && isset($_POST["day"]) &&
 <br>
 <input type="submit" value="Submit"><br>
 </form>
+
+
+
+<h2>Soovid</h2>
+<?php 
+	
+	$html = "<table>";
+	
+	$html .= "<tr>";
+		$html .= "<th>huvi_username</th>";
+		$html .= "<th>activity</th>";
+		$html .= "<th>time</th>";
+		$html .= "<th>day</th>";
+	$html .= "</tr>";
+	
+	//iga liikme kohta massiivis
+	foreach($huvi_data as $c){
+		// iga auto on $c
+		//echo $c->plate."<br>";
+		
+		$html .= "<tr>";
+			$html .= "<td>".$c->huvi_username."</td>";
+			$html .= "<td>".$c->activity."</td>";
+			$html .= "<td>".$c->time."</td>";
+			$html .= "<td>".$c->day."</td>";
+			
+			
+		$html .= "</tr>";
+	}
+	
+	$html .= "</table>";
+	
+	echo $html;
+	
+	
+	$listHtml = "<br><br>";
+	
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

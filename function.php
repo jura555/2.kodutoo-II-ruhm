@@ -84,11 +84,11 @@ function addWish ($activity, $time, $day) {
 		
 		$database = "if16_juri";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
-		$stmt = $mysqli->prepare("INSERT INTO huvi_data (activity, time, day, username) VALUES (?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO huvi_data (activity, time, day, huvi_username) VALUES (?, ?, ?, ?)");
 	
 		echo $mysqli->error;
 		
-		$stmt->bind_param("ssss", $activity, $time, $day, $_SESSION["userUsername"]);
+		$stmt->bind_param("ssss", $activity, $time, $day, $huvi_username);
 		
 		echo $mysqli->error;
 		
@@ -104,7 +104,47 @@ function addWish ($activity, $time, $day) {
 	}
 
 
-
+	function getAllinterests() {
+		
+		$database = "if16_juri";
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
+		
+		$stmt = $mysqli->prepare("
+			SELECT activity, day, time, huvi_username
+			FROM huvi_data
+			
+		");
+		echo $mysqli->error;
+		
+		$stmt->bind_result($activity, $day, $time, $huvi_username);
+		$stmt->execute();
+		
+		
+		//tekitan massiivi
+		$result = array();
+		
+		// tee seda seni, kuni on rida andmeid
+		// mis vastab select lausele
+		while ($stmt->fetch()) {
+			
+			//tekitan objekti
+			$huvi = new StdClass();
+			
+			$huvi->activity = $activity;
+			$huvi->day = $day;
+			$huvi->time = $time;
+			$huvi->huvi_username = $huvi_username;
+			//echo $plate."<br>";
+			// iga kord massiivi lisan juurde nr märgi
+			array_push($result, $huvi);
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $result;
+	}
+	
 
 
 
