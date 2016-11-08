@@ -15,10 +15,9 @@ if(isset($_GET["logout"])) {
 $error = "";
 if ( isset($_POST["activity"]) && isset($_POST["day"]) && 
 	!empty($_POST["activity"]) && !empty($_POST["day"]) &&
-	isset($_POST["time"]) && !empty($_POST["time"]) &&
-	isset($_POST["username"]) && !empty($_POST["username"])) {
+	isset($_POST["time"]) && !empty($_POST["time"]) ) {
 		  
-	addWish($_POST["activity"], $_POST["day"], $_POST["time"], $_POST["username"]);
+	addWish($_POST["activity"], $_POST["day"], $_POST["time"]);
 		  
 	}
 

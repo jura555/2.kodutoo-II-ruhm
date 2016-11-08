@@ -88,7 +88,7 @@ function addWish ($activity, $time, $day) {
 	
 		echo $mysqli->error;
 		
-		$stmt->bind_param("ssss", $activity, $time, $day, $huvi_username);
+		$stmt->bind_param("ssss", $activity, $time, $day, $_SESSION["userUsername"]);
 		
 		echo $mysqli->error;
 		
